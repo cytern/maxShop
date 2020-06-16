@@ -73,12 +73,12 @@
 					<div id="minicart" class="remain_cart" style="display: none;">
                         <text class="empty">You have</text><text th:text="${maxCount}"> </text><text> items in your shopping cart.</text>
 						 <ol >
-						 	<li th:each="backOrder : ${cart.goodorders}">
-								<div class="img-block"><img th:src="@{${backOrder.goodurl}}" title="" alt="" /></div>
+						 	<li th:each="backOrder : ${goodOrders}">
+								<div class="img-block"><img th:src="@{${backOrder.goodUrl}}" title="" alt="" /></div>
 								<div class="detail-block">
-									<h4><a href="#" th:text="${backOrder.goodname}">Htc Mobile 1120</a></h4>
+									<h4><a href="#" th:text="${backOrder.goodName}">Htc Mobile 1120</a></h4>
 									<p>
-										<strong th:text="${backOrder.goodnum}">1</strong> x <strong th:text="${backOrder.goodprice}"></strong> ￥
+										<strong th:text="${backOrder.goodnum}">1</strong> x <strong th:text="${backOrder.goodPrice}"></strong> ￥
 									</p>
 									<a href="#" title="Details">Details</a>
 								</div>
@@ -88,7 +88,7 @@
 								</div>
 							</li>
 							<li>
-								<div class="total-block">Total:￥<span th:text="${cart.totalprice}">$1,900.00</span></div>
+								<div class="total-block">Total:￥<span th:text="${order.totalPrice}">$1,900.00</span></div>
 								<a th:href="@{/page/cart}" title="Checkout" class="colors-btn">Checkout</a>
 								<div class="clear"></div>
 							</li>

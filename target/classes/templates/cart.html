@@ -74,12 +74,12 @@
 							<div id="minicart" class="remain_cart" style="display: none;">
 								<text class="empty">You have</text><text th:text="${maxCount}"> </text><text> items in your shopping cart.</text>
 								<ol >
-									<li th:each="backOrder : ${cart.goodorders}">
-										<div class="img-block"><img th:src="@{${backOrder.goodurl}}" title="" alt="" /></div>
+									<li th:each="backOrder : ${goodOrders}">
+										<div class="img-block"><img th:src="@{${backOrder.goodUrl}}" title="" alt="" /></div>
 										<div class="detail-block">
-											<h4><a href="#" th:text="${backOrder.goodname}">Htc Mobile 1120</a></h4>
+											<h4><a href="#" th:text="${backOrder.goodName}">Htc Mobile 1120</a></h4>
 											<p>
-												<strong th:text="${backOrder.goodnum}">1</strong> x <strong th:text="${backOrder.goodprice}"></strong> ￥
+												<strong th:text="${backOrder.goodnum}">1</strong> x <strong th:text="${backOrder.goodPrice}"></strong> ￥
 											</p>
 											<a href="#" title="Details">Details</a>
 										</div>
@@ -89,7 +89,7 @@
 										</div>
 									</li>
 									<li>
-										<div class="total-block">Total:￥<span th:text="${cart.totalprice}">$1,900.00</span></div>
+										<div class="total-block">Total:￥<span th:text="${order.totalPrice}">$1,900.00</span></div>
 										<a th:href="@{/page/cart}" title="Checkout" class="colors-btn">Checkout</a>
 										<div class="clear"></div>
 									</li>
@@ -165,16 +165,69 @@
 <section class="content-wrapper">
 	<div class="content-container container">
 		<div class="col-1-layout">
-			<ul class="shopping-cart-table"  th:each="backOrder: ${cart.goodorders}">
+			<ul class="shopping-cart-table"  th:each="backOrder: ${goodOrders}">
 				<li>
-					<div class="img-box"><img th:src="@{${backOrder.goodurl}}" title="" alt="" /></div>
+					<div class="img-box"><img th:src="@{${backOrder.goodUrl}}" title="" alt="" /></div>
 					<a class="edit-btn" href="#" title="Edit">Edit</a>
 				</li>
 				<li>
 					<div class="remove-item-btn"><a th:href="@{/removeCart/}+${backOrder.goodorderid}" title="Remove"><img src="images/delete_item_btn.png" title="Remove" alt="Remove" /></a></div>
-					<div class="pro-name" th:text="${backOrder.goodname}">Htc  one 1120</div>
-					<div class="pro-qty"><input id="" type="text" value="1" /></div>
-					<div class="pro-price" th:text="${backOrder.goodprice}">$1,000.00</div>
+					<div class="pro-name" th:text="${backOrder.goodName}">Htc  one 1120</div>
+					<div class="pro-qty">
+
+						<input th:id="${backOrder.goodorderid}"   style="display: inline-block" type="text" th:value="${backOrder.goodnum}"  />
+					</div>
+					<div style="margin-right: 80px">
+						<button style="display: inline-block" th:onclick="addNum([[${backOrder.goodorderid}]])">+</button>
+						<button style="display: inline-block" th:onclick="disNum([[${backOrder.goodorderid}]])">-</button>
+					</div>
+					<script  th:inline="javascript">
+						function addNum(id) {
+                               var goodNum = document.getElementById(id).value;
+                               goodNum = parseInt(goodNum)
+							goodNum = goodNum + 1
+                               document.getElementById(id).value = goodNum;
+							var data = {
+								goodOrderId: id,
+								goodNum: goodNum
+							}
+							var baseUrl = [[${baseUrl}]];
+ 							$.ajax({
+								type: "GET",
+								url: baseUrl + "customer/updateGoodOrderSI",
+								data: data,
+								dataType: "json",
+								success: function(data){
+							   document.getElementById("price"+id).value = data.orderPrice
+									document.getElementById("totalPrice").value = data.totalPrice
+									document.getElementById("totalPrice1").value = data.totalPrice
+								}
+							});
+						}
+						function disNum(id) {
+							var goodNum = document.getElementById(id).value;
+							goodNum = parseInt(goodNum)
+							goodNum = goodNum - 1
+							document.getElementById(id).value = goodNum;
+							var data = {
+								goodOrderId: id,
+								goodNum: goodNum
+							}
+							var baseUrl = [[${baseUrl}]];
+							$.ajax({
+								type: "GET",
+								url: baseUrl + "customer/updateGoodOrderSI",
+								data: data,
+								dataType: "json",
+								success: function(data){
+									document.getElementById("price"+id).value = data.orderPrice
+									document.getElementById("totalPrice").value = data.totalPrice
+									document.getElementById("totalPrice1").value = data.totalPrice
+								}
+							});
+						}
+					</script>
+					￥:<div class="pro-price" ><input th:id="price + ${backOrder.goodorderid}" style="border-style:none" th:value="${backOrder.goodPrice}*${backOrder.goodnum}" ></div>
 				</li>
 			</ul>
 			<div class="show-option-block"><a href="#" title="Show Options">Show Options</a></div>
@@ -208,8 +261,8 @@
 				</div>
 			</div>
 			<div class="shopping-cart-totals">
-				<div class="subtotal-row"><div class="left">Subtotal</div><div class="right" th:text="${cart.totalprice}">$1,000,00</div></div>
-				<div class="grand-row"><div class="left">Grand  Total</div><div class="right" th:text="${cart.totalprice}">$1,000.00</div></div>
+				<div class="subtotal-row"><div class="left">Subtotal</div><div class="right"  >￥<input th:id="totalPrice" style="border-style:none" th:value="${order.totalPrice}"></div></div>
+				<div class="grand-row"><div class="left">Grand  Total</div><div class="right" >￥<input th:id="totalPrice1" style="border-style:none" th:value="${order.totalPrice}"></div></div>
 				<ul class="checkout-types">
 					<li><button class="colors-btn" title="Proceed to Checkout">Proceed to Checkout</button></li>
 					<li><a href="#" title="Checkout With Multiple Addresses">Checkout With Multiple Addresses</a></li>

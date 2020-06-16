@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: 12345
-    url: jdbc:mysql://localhost:3306/funong?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/easyshop?useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     filters: log4j,stat,wall
@@ -26,8 +26,13 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
+  redis:
+    port: 6379
+    host: localhost
+
 mybatis:
-  type-aliases-package: com.funong.funong.pojo
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.liujinchai.pojo
+  mapper-locations: classpath:mapper/*.xml
+
 
 

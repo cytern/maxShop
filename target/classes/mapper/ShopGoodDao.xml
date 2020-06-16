@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liujinchai.mapper.ShopGoodDao">
+  <resultMap id="BaseResultMap" type="com.liujinchai.pojo.ShopGood">
+    <id column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="good_url" jdbcType="VARCHAR" property="goodUrl" />
+    <result column="good_price" jdbcType="DECIMAL" property="goodPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    good_id, good_name, good_url, good_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_good
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_good
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="good_id" keyProperty="goodId" parameterType="com.liujinchai.pojo.ShopGood" useGeneratedKeys="true">
+    insert into shop_good (good_name, good_url, good_price
+      )
+    values (#{goodName,jdbcType=VARCHAR}, #{goodUrl,jdbcType=VARCHAR}, #{goodPrice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="good_id" keyProperty="goodId" parameterType="com.liujinchai.pojo.ShopGood" useGeneratedKeys="true">
+    insert into shop_good
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodName != null">
+        good_name,
+      </if>
+      <if test="goodUrl != null">
+        good_url,
+      </if>
+      <if test="goodPrice != null">
+        good_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodUrl != null">
+        #{goodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        #{goodPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liujinchai.pojo.ShopGood">
+    update shop_good
+    <set>
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodUrl != null">
+        good_url = #{goodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        good_price = #{goodPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liujinchai.pojo.ShopGood">
+    update shop_good
+    set good_name = #{goodName,jdbcType=VARCHAR},
+      good_url = #{goodUrl,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=DECIMAL}
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <select id="getAllGood" resultMap="BaseResultMap">
+    select * from shop_good;
+  </select>
+</mapper>

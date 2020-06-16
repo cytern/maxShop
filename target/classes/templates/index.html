@@ -74,22 +74,22 @@
 					<div id="minicart" class="remain_cart" style="display: none;">
                         <text class="empty">You have</text><text th:text="${maxCount}"> </text><text> items in your shopping cart.</text>
 						 <ol >
-						 	<li th:each="backOrder : ${cart.goodorders}">
-								<div class="img-block"><img th:src="@{${backOrder.goodurl}}" title="" alt="" /></div>
+						 	<li th:each="backOrder : ${goodOrders}">
+								<div class="img-block"><img th:src="@{${backOrder.goodUrl}}" title="" alt="" /></div>
 								<div class="detail-block">
-									<h4><a href="#" th:text="${backOrder.goodname}">Htc Mobile 1120</a></h4>
+									<h4><a href="#" th:text="${backOrder.goodName}">Htc Mobile 1120</a></h4>
 									<p>
-										<strong th:text="${backOrder.goodnum}">1</strong> x <strong th:text="${backOrder.goodprice}"></strong> ￥
+										<strong th:text="${backOrder.goodNum}">1</strong> x <strong th:text="${backOrder.goodPrice}"></strong> ￥
 									</p>
 									<a href="#" title="Details">Details</a>
 								</div>
 								<div class="edit-delete-block">
 									<a href="#" title="Edit"><img src="images/edit_icon.png" alt="Edit" title="Edit" /></a>
-									<a href="#" th:href="@{/removeCart/}+${backOrder.goodorderid}" title="Remove"><img src="images/delete_item_btn.png" alt="Remove" title="Remove" /></a>
+									<a href="#" th:href="@{/removeCart/}+${backOrder.goodOrderId}" title="Remove"><img src="images/delete_item_btn.png" alt="Remove" title="Remove" /></a>
 								</div>
 							</li>
 							<li>
-								<div class="total-block">Total:￥<span th:text="${cart.totalprice}">$1,900.00</span></div>
+								<div class="total-block">Total:￥<span th:text="${order.totalPrice}">$1,900.00</span></div>
 								<a th:href="@{/page/cart}" title="Checkout" class="colors-btn">Checkout</a>
 								<div class="clear"></div>
 							</li>
@@ -191,13 +191,13 @@
                 <div class="feature-block">
                   <ul id="mix" class="product-grid" th:remove="all-but-first">
                     <li th:each="adviceGood : ${adviceList}">
-                      <div class="pro-img" ><img style="height: 200px;height: 200px" th:src="@{${adviceGood.goodurl}}"/></div>
+                      <div class="pro-img" ><img style="height: 200px;height: 200px" th:src="@{${adviceGood.goodUrl}}"/></div>
                       <div class="pro-hover-block">
-                        <h4 class="pro-name" th:text="${adviceGood.goodname}">Htc One 1120</h4>
+                        <h4 class="pro-name" th:text="${adviceGood.goodName}">Htc One 1120</h4>
                         <div class="link-block"> 
                         <a href="#quick-view-container" class="quickllook inline" title="Quick View">Quick View</a> 
                         <a href="view.html" class="quickproLink" title="Link">Product link</a></div>
-                        <div class="pro-price" th:text="${adviceGood.goodprice}">$600.00</div>
+                        <div class="pro-price" th:text="${adviceGood.goodPrice}">$600.00</div>
                       </div>
                     </li>
                   </ul>
@@ -209,14 +209,14 @@
                   <ul class="product-grid" th:remove="all-but-first">
                     <li th:each="good : ${goodList}" style="display: inline-block;margin-left: 0px;margin-right: 10px;">
                       <div class="pro-img">
-                        <img  style="width: 200px;height: 200px" th:src="@{${good.goodurl}}" src="images/banner1.jpg"/>
+                        <img  style="width: 200px;height: 200px" th:src="@{${good.goodUrl}}" src="images/banner1.jpg"/>
                       </div>
                       <div class="pro-content">
-                        <p th:text="${good.goodname}">White Round Neck T-Shirt</p>
+                        <p th:text="${good.goodName}">White Round Neck T-Shirt</p>
                       </div>
-                      <div class="pro-price" th:text="${good.goodprice}">$600.00</div>
+                      <div class="pro-price" th:text="${good.goodPrice}">$600.00</div>
                       <div class="pro-btn-block"> 
-                      <a class="add-cart left" th:href="@{/addCart/}+${good.goodid}" title="Add to Cart">Add to Cart</a>
+                      <a class="add-cart left" th:href="@{/addCart/}+${good.goodId}" title="Add to Cart">Add to Cart</a>
                       <a class="add-cart right quickCart inline" href="#quick-view-container"  title="Quick View">Quick View</a> </div>
                         <div class="clearfix"></div>
                       </div>

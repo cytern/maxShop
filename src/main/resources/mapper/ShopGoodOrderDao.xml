@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liujinchai.mapper.ShopGoodOrderDao">
+  <resultMap id="BaseResultMap" type="com.liujinchai.pojo.ShopGoodOrder">
+    <id column="good_order_id" jdbcType="INTEGER" property="goodOrderId" />
+    <result column="good_num" jdbcType="INTEGER" property="goodNum" />
+    <result column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="good_url" jdbcType="VARCHAR" property="goodUrl" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="good_price" jdbcType="DECIMAL" property="goodPrice" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    good_order_id, good_num, good_id, user_id, good_url, good_name, good_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_good_order
+    where good_order_id = #{goodOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_good_order
+    where good_order_id = #{goodOrderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="good_order_id" keyProperty="goodOrderId" parameterType="com.liujinchai.pojo.ShopGoodOrder" useGeneratedKeys="true">
+    insert into shop_good_order (good_num, good_id, user_id, 
+      good_url, good_name, good_price
+      )
+    values (#{goodNum,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{goodUrl,jdbcType=VARCHAR}, #{goodName,jdbcType=VARCHAR}, #{goodPrice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="good_order_id" keyProperty="goodOrderId" parameterType="com.liujinchai.pojo.ShopGoodOrder" useGeneratedKeys="true">
+    insert into shop_good_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodNum != null">
+        good_num,
+      </if>
+      <if test="goodId != null">
+        good_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="goodUrl != null">
+        good_url,
+      </if>
+      <if test="goodName != null">
+        good_name,
+      </if>
+      <if test="goodPrice != null">
+        good_price,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodNum != null">
+        #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodId != null">
+        #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="goodUrl != null">
+        #{goodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        #{goodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodPrice != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liujinchai.pojo.ShopGoodOrder">
+    update shop_good_order
+    <set>
+      <if test="goodNum != null">
+        good_num = #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodId != null">
+        good_id = #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="goodUrl != null">
+        good_url = #{goodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        good_price = #{goodPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where good_order_id = #{goodOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liujinchai.pojo.ShopGoodOrder">
+    update shop_good_order
+    set good_num = #{goodNum,jdbcType=INTEGER},
+      good_id = #{goodId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      good_url = #{goodUrl,jdbcType=VARCHAR},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=DECIMAL}
+    where good_order_id = #{goodOrderId,jdbcType=INTEGER}
+  </update>
+    <select id="getAllGoodOrder" resultMap="BaseResultMap">
+      select * from shop_good_order where order_id =#{orderId};
+    </select>
+</mapper>

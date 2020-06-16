@@ -8,10 +8,10 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.funong</groupId>
-    <artifactId>funong</artifactId>
+    <groupId>com.acc</groupId>
+    <artifactId>acc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>funong</name>
+    <name>acc</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -26,7 +26,14 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
